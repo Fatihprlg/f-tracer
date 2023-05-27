@@ -11,6 +11,11 @@ internal class FileLogger : ILogger
         _settings = settings;
         _saveFileName = DateTime.Today.ToString(_settings.loggerPeriod == FileLoggerPeriod.Daily ? "dd-MM-yyyy" : "MM-yyyy");
     }
+
+    public string GetLastLogFileName()
+    {
+        return _settings.loggerType == FileLoggerType.Binary ? $"{_saveFileName}.log" : $"{_saveFileName}.json";
+    }
     
     public void Error(string message, Object @object = null)
     {

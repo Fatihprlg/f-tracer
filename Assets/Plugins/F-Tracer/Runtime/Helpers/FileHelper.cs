@@ -24,7 +24,7 @@ internal static class FileHelper
                         writer.Write(oldLogData[i].logMessage);
                     }
                 }
-                else writer.Write((byte)1);
+                else writer.Write(1);
                 writer.Write((byte)logData.logType);
                 writer.Write(logData.logMessage);
             }

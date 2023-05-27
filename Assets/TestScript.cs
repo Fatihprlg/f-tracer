@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TestScript : MonoBehaviour
@@ -12,5 +10,7 @@ public class TestScript : MonoBehaviour
         FLogger.Log("This is a default log");
         FLogger.Log("This is a default log with obj", this);
         FLogger.Log("This is a custom log", FLoggerColors.Blue);
+        FStackTracer.OnExceptionRaised += (logString, trace) => Debug.Log("ex," + trace + "   " + logString);
+        Debug.LogException(new ArgumentException("Argument null olabilur", "param param"));
     }
 }

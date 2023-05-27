@@ -1,18 +1,13 @@
 using System;
 using System.IO;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [Serializable]
 public class FSettings
 {
-    public bool consoleLoggerActive = false;
-    public bool fileLoggerActive = false;
-    public bool databaseLoggerActive = false;
-    public bool firebaseLoggerActive = false;
-    public FFileLoggerSettings fileLoggerSettings = new ();
-    public FDatabaseLoggerSettings databaseLoggerSettings = new ();
-    public FFirebaseLoggerSettings firebaseLoggerSettings = new ();
-
+    public FLoggerSettings fLoggerSettings = new();
+    public FTracerSettings fTracerSettings = new();
 
     public void Save()
     {
