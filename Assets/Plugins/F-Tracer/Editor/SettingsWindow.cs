@@ -98,12 +98,10 @@ internal class SettingsWindow : EditorWindow
     {
         GUILayout.Label("----Tracer----", EditorStyles.boldLabel);
 
-        _settings.fTracerSettings.sendEmailActive =
-            EditorGUILayout.BeginToggleGroup("Send E-Mail On Crush", _settings.fTracerSettings.sendEmailActive);
+        _settings.fTracerSettings.sendEmailActive = EditorGUILayout.BeginToggleGroup("Send E-Mail On Crush", _settings.fTracerSettings.sendEmailActive);
         _settings.fTracerSettings.emailSettings.smtpClientHost = EditorGUILayout.TextField("SMTP Client", _settings.fTracerSettings.emailSettings.smtpClientHost);
         _settings.fTracerSettings.emailSettings.fromEmail = EditorGUILayout.TextField("From E-mail", _settings.fTracerSettings.emailSettings.fromEmail);
         _settings.fTracerSettings.emailSettings.fromPassword = EditorGUILayout.PasswordField("From Password", _settings.fTracerSettings.emailSettings.fromPassword);
-        EditorGUILayout.EndToggleGroup();
         EditorGUILayout.PrefixLabel(new GUIContent("To Email List", "One e-mail per line"));
         _toEmailList = EditorGUILayout.TextArea(_toEmailList, GUILayout.MinHeight(200));
         EditorGUILayout.EndToggleGroup();
