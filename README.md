@@ -3,6 +3,7 @@ A stack tracer and logger for unity game engine
 
 ### Configuration
 To configure F-Tracer settings, go to FTracer>Settings window from topbar. 
+
 ![image](https://github.com/Fatihprlg/f-tracer/assets/58040833/27ca4803-7c46-4b9d-9b68-c846aeeed032)
 
 ![image](https://github.com/Fatihprlg/f-tracer/assets/58040833/a2efc0dd-1c85-4674-9ffd-c20ff0489055)
