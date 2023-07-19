@@ -31,5 +31,6 @@ public static class FStackTracer
         {
             EmailHelper.SendCrushReport(_settings.emailSettings, stackTrace);
         }
+        
     }
 }

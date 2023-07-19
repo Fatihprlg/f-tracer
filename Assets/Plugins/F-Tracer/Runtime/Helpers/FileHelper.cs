@@ -56,13 +56,13 @@ internal static class FileHelper
             }
             catch (Exception ex)
             {
-                Debug.LogError($"Error reading file: {ex.Message}");
+                FLogger.Error($"Error reading file: {ex.Message}");
                 logData = null;
             }
         }
         else
         {
-            Debug.LogError($"File not found at path: {fileFullPath}");
+            FLogger.Warning($"File not found at path: {fileFullPath}");
             logData = null;
         }
     }
@@ -94,7 +94,7 @@ internal static class FileHelper
         }
         catch (Exception e)
         {
-            Debug.LogError($"Error writing file {fileName}: {e.Message}");
+            FLogger.Error($"Error writing file {fileName}: {e.Message}");
         }
         
     }
@@ -113,13 +113,13 @@ internal static class FileHelper
             }
             catch (Exception e)
             {
-                Debug.LogError($"Error reading file {fileName}: {e.Message}");
+                FLogger.Error($"Error reading file {fileName}: {e.Message}");
                 saveData = null;
             }
         }
         else
         {
-            Debug.LogError($"Error reading file {fileName}: file not exists");
+            FLogger.Error($"Error reading file {fileName}: file not exists");
             saveData = null;
         }
     }

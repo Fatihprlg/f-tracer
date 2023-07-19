@@ -3,8 +3,7 @@ using System;
 [Serializable]
 public class FTracerSettings
 {
-    public bool sendEmailActive = false;
-    public bool customSmtp = false;
+    public bool sendEmailActive;
     public FEmailSettings emailSettings = new ();
 
 }

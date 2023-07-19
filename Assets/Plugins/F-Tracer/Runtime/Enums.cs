@@ -1,5 +1,6 @@
 public enum FLoggerColors
 {
+    White,
     Red,
     Green,
     Blue,
@@ -13,7 +14,8 @@ public enum LogType
     Error,
     Warning,
     Custom,
-    Exception
+    Exception,
+    Event
 }
 
 public enum FileLoggerType

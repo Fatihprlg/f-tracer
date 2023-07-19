@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using UnityEditor;
 using UnityEngine;
 
@@ -11,9 +12,6 @@ internal class SettingsWindow : EditorWindow
     private string _toEmailList;
     private GUIContent _fileLoggerTypeContent;
     private GUIContent _fileLoggerPeriodContent;
-    private GUIContent _databaseLoggerConnectionContent;
-    private GUIContent _databaseLoggerUNameContent;
-    private GUIContent _databaseLoggerPwdContent;
 
     [MenuItem("FTracer/Settings")]
     private static void ShowWindow()
@@ -27,19 +25,22 @@ internal class SettingsWindow : EditorWindow
     private void OnEnable()
     {
         _settings = FSettings.Load();
-
+        var sb = new StringBuilder();
+        foreach (var mail in _settings.fTracerSettings.emailSettings.toEmail)
+        {
+            sb.Append($"{mail}\n");
+        }
+        _toEmailList = sb.ToString();
+        
         _fileLoggerTypeContent = new GUIContent("File Logger Type", "Select the type of save file for file logger");
         _fileLoggerPeriodContent = new GUIContent("File Logger Period",
             "Select the time period which the file logger create new file");
-        _databaseLoggerConnectionContent = new GUIContent("Connection String", "Enter database connection string");
-        _databaseLoggerUNameContent = new GUIContent("Username", "Enter the username for connection");
-        _databaseLoggerPwdContent = new GUIContent("Password", "Enter the password for connection");
     }
 
     private void OnGUI()
     {
         GUILayout.Label("F Tracer Settings", EditorStyles.boldLabel);
-
+        
         DrawLoggerSettings();
         DrawTracerSettings();
         DrawBottomButtons();
@@ -86,11 +87,6 @@ internal class SettingsWindow : EditorWindow
 
         if (GUILayout.Button("Save"))
         {
-            if (!_settings.fTracerSettings.customSmtp)
-            {
-                _settings.fTracerSettings.emailSettings = new FEmailSettings();
-            }
-
             ParseEmailList();
             _settings.Save();
         }
@@ -104,8 +100,6 @@ internal class SettingsWindow : EditorWindow
 
         _settings.fTracerSettings.sendEmailActive =
             EditorGUILayout.BeginToggleGroup("Send E-Mail On Crush", _settings.fTracerSettings.sendEmailActive);
-        _settings.fTracerSettings.customSmtp =
-            EditorGUILayout.BeginToggleGroup("Custom SMTP Client (Recommended)", _settings.fTracerSettings.customSmtp);
         _settings.fTracerSettings.emailSettings.smtpClientHost = EditorGUILayout.TextField("SMTP Client", _settings.fTracerSettings.emailSettings.smtpClientHost);
         _settings.fTracerSettings.emailSettings.fromEmail = EditorGUILayout.TextField("From E-mail", _settings.fTracerSettings.emailSettings.fromEmail);
         _settings.fTracerSettings.emailSettings.fromPassword = EditorGUILayout.PasswordField("From Password", _settings.fTracerSettings.emailSettings.fromPassword);
@@ -131,18 +125,6 @@ internal class SettingsWindow : EditorWindow
             (FileLoggerPeriod)EditorGUILayout.EnumPopup(
                 _fileLoggerPeriodContent,
                 _settings.fLoggerSettings.fileLoggerSettings.loggerPeriod);
-        EditorGUILayout.EndToggleGroup();
-        _settings.fLoggerSettings.databaseLoggerActive =
-            EditorGUILayout.BeginToggleGroup("Database Logger", _settings.fLoggerSettings.databaseLoggerActive);
-        _settings.fLoggerSettings.databaseLoggerSettings.connectionString = EditorGUILayout.TextField(
-            _databaseLoggerConnectionContent,
-            _settings.fLoggerSettings.databaseLoggerSettings.connectionString);
-        _settings.fLoggerSettings.databaseLoggerSettings.userName = EditorGUILayout.TextField(
-            _databaseLoggerUNameContent,
-            _settings.fLoggerSettings.databaseLoggerSettings.userName);
-        _settings.fLoggerSettings.databaseLoggerSettings.password = EditorGUILayout.PasswordField(
-            _databaseLoggerPwdContent,
-            _settings.fLoggerSettings.databaseLoggerSettings.password);
         EditorGUILayout.EndToggleGroup();
         _settings.fLoggerSettings.firebaseLoggerActive =
             EditorGUILayout.BeginToggleGroup("Firebase Logger", _settings.fLoggerSettings.firebaseLoggerActive);

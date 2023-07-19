@@ -28,6 +28,16 @@ internal class FileLogger : ILogger
         SaveLogData(logData);
     }
 
+    public void Exception(string message, Object @object = null)
+    {
+        var contextName = @object ? @object.ToString() : "LogException";
+        var logData = new LogData
+        {
+            logMessage = $"<{DateTime.Now:hh:mm:ss t z}> {contextName} : {message}",
+            logType = LogType.Exception
+        };
+        SaveLogData(logData);    }
+
     public void Warning(string message, Object @object = null)
     {
         var contextName = @object ? @object.ToString() : "LogWarning";
@@ -37,6 +47,26 @@ internal class FileLogger : ILogger
             logType = LogType.Warning
         };
         SaveLogData(logData);  
+    }
+
+    public void Event(string message, string paramName, string param)
+    {
+        var logData = new LogData
+        {
+            logMessage = $"<{DateTime.Now:hh:mm:ss t z}> LogEvent : [{paramName}] : {param} : {message}",
+            logType = LogType.Event
+        };
+        SaveLogData(logData);  
+    }
+
+    public void Event(string message)
+    {
+        var logData = new LogData
+        {
+            logMessage = $"<{DateTime.Now:hh:mm:ss t z}> LogEvent : {message}",
+            logType = LogType.Event
+        };
+        SaveLogData(logData);    
     }
 
     public void Log(string message, Object @object = null)

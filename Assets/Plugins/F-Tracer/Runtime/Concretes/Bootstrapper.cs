@@ -1,6 +1,6 @@
 using UnityEngine;
 
-internal class Bootsrapper
+internal static class Bootstrapper
 {
     [RuntimeInitializeOnLoadMethod]
     private static void Initialize()
@@ -10,5 +10,4 @@ internal class Bootsrapper
         FLogger.Load(settings.fLoggerSettings);
         FLogger.Log("Application started.", FLoggerColors.Green);
     }
-    
 }

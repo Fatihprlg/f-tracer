@@ -5,6 +5,11 @@ internal static class EmailHelper
 {
     internal static void SendCrushReport(FEmailSettings emailSettings, string trace)
     {
+        if (!emailSettings.IsCredentialsValid)
+        {
+            FLogger.Warning("Mail credentials is not valid!");
+            return;
+        }
         var mail = new MailMessage();
         foreach (var to in emailSettings.toEmail)
         {
@@ -41,8 +46,6 @@ internal static class EmailHelper
         {
             Debug.Log(ex.Message);
         }
-
-
     }
     
 }
