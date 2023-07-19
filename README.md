@@ -30,4 +30,5 @@ If you configured mail settings, people thoose in your mail list, will recieve a
 If you use firebase extensions you will need two packages:
 - Firebase Analytics (if use firebase logger)
 - Firebase Crushlytics (if use firebase logger)
+
 Otherwise you can delete firebase extensions from project.
